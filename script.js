@@ -1,3 +1,3 @@
 const input = require('fs').readFileSync('stdin', 'utf8');
-let lines = input.split('\n').map(line => line.replace('\r', ''));
+let arr = input.split(' ').map(Number).sort((a, b) => a - b);
 

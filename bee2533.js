@@ -1,27 +1,33 @@
-//BEE2533
-// for (let i = 1; i < lines[0]; i++) {
-//     discN += lines[i].reduce((accum, el) => accum *= el)
-//     discH += lines[i][1]
-// }
-
-// console.log(((discN / discH) / 100).toFixed(4))
+const input = require('fs').readFileSync('stdin', 'utf8');
+var lines = input.split('\n').map(line => line.replace('\r', ''));
 
 
-// lines.forEach((element, indx) => {
 
 
-//     let discN = 0;
-//     let discH = 0;
+//Enquanto há elementos no array
+while (lines.length > 0) {
 
-//     if (element.length === 1) {
-//         for (let i = indx; i < (indx + element); i++) {
+    //Declarando variáveis
+    let totalNotas = 0;
+    let totalcargaHoraria = 0;
 
-//             if (lines[i] && lines[i].length > 1) {
-//                 // discN += lines[i].reduce((accum, el) => accum *= el)
-//                 discN += lines[i][0] * lines[i][1]
-//                 discH += lines[i][1] ? lines[i][1] : 0
-//             }
-//         }
-//         console.log(((discN / discH) / 100).toFixed(4))
-//     }
-// })
+    //Pegando o primeiro valor do array que será o iterator
+    const iterador = parseInt(lines.shift());
+
+
+    //Loopando para pegar os valores de acordo com o iterator
+    for (let i = 0; i < iterador; i++) {
+        const [nota, cargaHoraria] = lines[i].split(' ').map(Number);
+        totalNotas += nota * cargaHoraria
+        totalcargaHoraria += cargaHoraria * 100
+    }
+
+    let result = (totalNotas / totalcargaHoraria).toFixed(4)
+
+    //Lendo o resultado se for válido
+    if (!isNaN(result)) {
+        console.log(result)
+    }
+    //Removendo os elementos do array para que dê continuidade ao programa e tenha um novo iterador 
+    lines.splice(0, iterador)
+}

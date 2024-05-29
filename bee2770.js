@@ -1,23 +1,22 @@
-const input = require('fs').readFileSync('stdin', 'utf8')
-const lines = input.split('\n').map(el => el.replace('\r', '').split(' ').map(Number));
+var input = require('fs').readFileSync('/dev/stdin', 'utf8');
+var lines = input.split('\n');
 
-let placaEmpresa = 0;
-let placaCliente = 0;
+//Loopando até que não haja elementos
+while (lines.length > 0) {
 
-
-//Varrendo o array
-lines.forEach((element) => {
-
-    //Somando os elementos
-    const sum = element.reduce((accum, num) => accum += num);
+    //Desestruturando
+    const [X, Y, M] = lines.shift().split(' ').map(Number)
 
 
-    //Se o tamanho do elemento for 3, então a soma é atribuida e variável placaEmpresa
-    if (element.length === 3) {
-        placaEmpresa = sum
-    } else {
-        //Se não for, então a soma é atribuida a placaCliente e é testada a condição
-        placaCliente = sum;
-        console.log(placaCliente <= placaEmpresa ? 'Sim' : 'Nao')
-    }
-})
+    //Pegando os números
+    lines.splice(0, M).forEach((nums) => {
+        const [X1, Y1] = nums.split(' ').map(Number)
+
+        //Testando condições
+        if ((X1 <= X && Y1 <= Y) || (Y1 <= X && X1 <= Y)) {
+            console.log('Sim')
+        } else {
+            console.log('Nao')
+        }
+    })
+}

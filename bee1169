@@ -1,0 +1,26 @@
+const input = require('fs').readFileSync('stdin', 'utf8');
+var lines = input.split('\n').map(Number);
+
+
+//Pegando a quantidade de entras
+const iterator = lines.shift()
+
+
+//Loopando
+for (let i = 0; i < iterator; i++) {
+    
+    //Declarando variáveis
+    let gramas = 1
+    let count = gramas;
+
+    const actualSquare = lines[i];
+
+    //Loopando para preencher a quantidade de quadrados
+    for (let j = 0; j < actualSquare; j++) {
+        gramas = gramas * 2
+        count += gramas
+    }
+
+    //Transformando em gramas e depois em kg
+    console.log(`${Math.trunc((gramas / 12) / 1000)} kg`)
+}
